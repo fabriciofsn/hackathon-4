@@ -52,7 +52,7 @@ export class Docente {
   napne: Napne;
 
   @OneToMany(() => QuestionarioDocente, (questionario) => questionario.docente)
-  questionarioDocente: QuestionarioDocente;
+  questionarioDocente?: QuestionarioDocente;
 
   constructor(docente: Partial<Docente>) {
     Object.assign(this, docente);

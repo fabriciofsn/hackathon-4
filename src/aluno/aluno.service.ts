@@ -4,16 +4,25 @@ import { UpdateAlunoDto } from './dto/update-aluno.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Aluno } from './entities/aluno.entity';
 import { Repository } from 'typeorm';
+import { Napne } from 'src/napne/entities/napne.entity';
 
 @Injectable()
 export class AlunoService {
   constructor(
     @InjectRepository(Aluno)
     private readonly alunoRepository: Repository<Aluno>,
+    @InjectRepository(Napne)
+    private readonly napneRepository: Repository<Napne>,
   ) {}
 
   async create(createAlunoDto: CreateAlunoDto): Promise<Aluno> {
-    const aluno = new Aluno(createAlunoDto);
+    const { napne } = createAlunoDto;
+
+    const userNapne = await this.napneRepository.findOne({
+      where: { id: +napne },
+    });
+
+    const aluno = new Aluno({ napne: userNapne, ...createAlunoDto });
 
     try {
       return this.alunoRepository.save(aluno);

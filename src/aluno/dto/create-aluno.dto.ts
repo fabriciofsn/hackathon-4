@@ -1,5 +1,6 @@
 import { IsDate, IsEnum, IsNotEmpty, IsString } from 'class-validator';
 import { Raca } from '../entities/aluno.entity';
+import { Napne } from 'src/napne/entities/napne.entity';
 
 export class CreateAlunoDto {
   @IsString()
@@ -32,4 +33,7 @@ export class CreateAlunoDto {
   @IsDate()
   @IsNotEmpty()
   data_nascimento: Date;
+
+  @IsNotEmpty()
+  napne: Napne;
 }

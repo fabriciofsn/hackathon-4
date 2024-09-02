@@ -4,16 +4,23 @@ import { UpdateDocenteDto } from './dto/update-docente.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Docente } from './entities/docente.entity';
 import { Repository } from 'typeorm';
+import { Napne } from 'src/napne/entities/napne.entity';
 
 @Injectable()
 export class DocenteService {
   constructor(
     @InjectRepository(Docente)
     private readonly docenteRepository: Repository<Docente>,
+    @InjectRepository(Napne)
+    private readonly napneRepository: Repository<Napne>,
   ) {}
 
   async create(createDocenteDto: CreateDocenteDto) {
-    const userDocente = new Docente(createDocenteDto);
+    const { napne } = createDocenteDto;
+    const userNapne = await this.napneRepository.findOne({
+      where: { id: +napne },
+    });
+    const userDocente = new Docente({ napne: userNapne, ...createDocenteDto });
     return this.docenteRepository.save(userDocente);
   }
 
@@ -25,8 +32,9 @@ export class DocenteService {
     return this.docenteRepository.findOne({ where: { id } });
   }
 
-  findByEmail(email: string) {
-    return this.docenteRepository.findOne({ where: { email } });
+  async findByEmail(email: string) {
+    const user = await this.docenteRepository.findOne({ where: { email } });
+    return user;
   }
 
   async update(id: number, updateDocenteDto: UpdateDocenteDto) {

@@ -1,4 +1,5 @@
-import { IsNotEmpty, IsString, Matches } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, Matches } from 'class-validator';
+import { Napne } from 'src/napne/entities/napne.entity';
 
 export class CreateDocenteDto {
   @IsString()
@@ -16,4 +17,7 @@ export class CreateDocenteDto {
   @IsString()
   @IsNotEmpty()
   curso: string;
+
+  @IsNotEmpty()
+  napne: Napne;
 }

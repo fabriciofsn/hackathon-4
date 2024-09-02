@@ -7,6 +7,9 @@ import { AlunoModule } from './aluno/aluno.module';
 import { QuestionarioDocenteModule } from './questionario-docente/questionario-docente.module';
 import { QuestionarioDiscenteModule } from './questionario-discente/questionario-discente.module';
 import { AuthModule } from './auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { AuthGuard } from './auth/auth.guard';
+import { RolesGuard } from './auth/roles.guard';
 
 @Module({
   imports: [
@@ -20,6 +23,12 @@ import { AuthModule } from './auth/auth.module';
     AuthModule,
   ],
   controllers: [],
-  providers: [],
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard,
+    },
+    RolesGuard,
+  ],
 })
 export class AppModule {}
