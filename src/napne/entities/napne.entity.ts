@@ -36,6 +36,9 @@ export class Napne {
   @Matches(/^\d{3}\.?\d{3}\.?\d{3}-?\d{2}$/)
   CPF: string;
 
+  @Column({ name: 'user_type', default: 'napne' })
+  userType?: string;
+
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
 

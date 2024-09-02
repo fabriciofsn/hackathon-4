@@ -8,14 +8,12 @@ import {
   JoinColumn,
   ManyToOne,
   OneToMany,
-  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 
 import * as bcrypt from 'bcrypt';
 import { Matches } from 'class-validator';
-import { QuestionarioDiscente } from 'src/questionario-discente/entities/questionario-discente.entity';
 import { Napne } from 'src/napne/entities/napne.entity';
 import { QuestionarioDocente } from 'src/questionario-docente/entities/questionario-docente.entity';
 
@@ -36,6 +34,9 @@ export class Docente {
 
   @Column()
   curso: string;
+
+  @Column({ name: 'user_type', default: 'docente' })
+  userType?: string;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

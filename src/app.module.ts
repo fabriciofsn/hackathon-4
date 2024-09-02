@@ -6,6 +6,7 @@ import { NapneModule } from './napne/napne.module';
 import { AlunoModule } from './aluno/aluno.module';
 import { QuestionarioDocenteModule } from './questionario-docente/questionario-docente.module';
 import { QuestionarioDiscenteModule } from './questionario-discente/questionario-discente.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { QuestionarioDiscenteModule } from './questionario-discente/questionario
     AlunoModule,
     QuestionarioDocenteModule,
     QuestionarioDiscenteModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],

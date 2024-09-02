@@ -8,5 +8,6 @@ import { Napne } from './entities/napne.entity';
   imports: [TypeOrmModule.forFeature([Napne])],
   controllers: [NapneController],
   providers: [NapneService],
+  exports: [NapneService],
 })
 export class NapneModule {}

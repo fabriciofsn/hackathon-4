@@ -25,6 +25,10 @@ export class NapneService {
     return this.napneRepository.findOne({ where: { id } });
   }
 
+  findByEmail(email: string) {
+    return this.napneRepository.findOne({ where: { email } });
+  }
+
   async update(id: number, updateNapneDto: UpdateNapneDto) {
     const userNapne = await this.napneRepository.findOneOrFail({
       where: { id },

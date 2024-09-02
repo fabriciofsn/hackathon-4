@@ -25,6 +25,10 @@ export class DocenteService {
     return this.docenteRepository.findOne({ where: { id } });
   }
 
+  findByEmail(email: string) {
+    return this.docenteRepository.findOne({ where: { email } });
+  }
+
   async update(id: number, updateDocenteDto: UpdateDocenteDto) {
     const docenteUpdate = await this.docenteRepository.findOne({
       where: { id },
