@@ -20,6 +20,7 @@ export class AuthService {
   async signInNapne(email: string, pass: string) {
     const user = await this.napneService.findByEmail(email);
     if (!user) throw new NotFoundException('Email não encontrado.');
+
     const comparePassword = await bcrypt.compare(pass, user.senha);
 
     if (!comparePassword) throw new UnauthorizedException();
@@ -43,7 +44,7 @@ export class AuthService {
 
     if (!docente) throw new NotFoundException('Email não encontrado');
 
-    const comparePassword = await bcrypt.compare(pass, docente.senha);
+    const comparePassword = bcrypt.compare(pass, docente.senha);
 
     if (!comparePassword) throw new UnauthorizedException();
 

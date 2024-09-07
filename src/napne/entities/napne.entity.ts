@@ -16,6 +16,7 @@ import * as bcrypt from 'bcrypt';
 import { Docente } from 'src/docente/entities/docente.entity';
 import { Aluno } from 'src/aluno/entities/aluno.entity';
 import { QuestionarioDiscente } from 'src/questionario-discente/entities/questionario-discente.entity';
+import { Curso } from 'src/cursos/entities/curso.entity';
 
 @Entity()
 export class Napne {
@@ -56,6 +57,9 @@ export class Napne {
 
   @OneToMany(() => Docente, (docente) => docente.napne)
   docente: Docente;
+
+  @OneToMany(() => Curso, (curso) => curso.napneId)
+  curso: Curso;
 
   constructor(napne: Partial<Napne>) {
     Object.assign(this, napne);
