@@ -21,11 +21,14 @@ export class DocenteService {
       where: { id: +napne },
     });
     const userDocente = new Docente({ napne: userNapne, ...createDocenteDto });
+    console.log(userDocente);
     return this.docenteRepository.save(userDocente);
   }
 
   findAll() {
-    return this.docenteRepository.find({ select: ['nome', 'email', 'curso'] });
+    return this.docenteRepository.find({
+      select: ['id', 'nome', 'email', 'cursos'],
+    });
   }
 
   findOne(id: number) {

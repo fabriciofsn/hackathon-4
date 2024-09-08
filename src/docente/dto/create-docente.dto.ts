@@ -16,7 +16,7 @@ export class CreateDocenteDto {
 
   @IsString()
   @IsNotEmpty()
-  curso: string;
+  cursos: string;
 
   @IsNotEmpty()
   napne: Napne;

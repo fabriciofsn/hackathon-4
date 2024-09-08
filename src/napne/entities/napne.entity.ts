@@ -1,4 +1,3 @@
-import { genSalt, hash } from 'bcrypt';
 import { Matches } from 'class-validator';
 import {
   BeforeInsert,
@@ -7,6 +6,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -52,14 +52,14 @@ export class Napne {
   @OneToOne(() => QuestionarioDiscente, (questionario) => questionario.napne)
   questionario: QuestionarioDiscente;
 
-  @OneToOne(() => Aluno, (aluno) => aluno.napne)
-  aluno: Aluno;
+  @OneToMany(() => Aluno, (aluno) => aluno.napne)
+  aluno: Aluno[];
 
   @OneToMany(() => Docente, (docente) => docente.napne)
-  docente: Docente;
+  docente: Docente[];
 
   @OneToMany(() => Curso, (curso) => curso.napneId)
-  curso: Curso;
+  curso: Curso[];
 
   constructor(napne: Partial<Napne>) {
     Object.assign(this, napne);

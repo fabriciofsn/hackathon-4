@@ -21,11 +21,11 @@ export class AlunoService {
     const userNapne = await this.napneRepository.findOne({
       where: { id: +napne },
     });
-
     const aluno = new Aluno({ napne: userNapne, ...createAlunoDto });
-
+    // aluno.napne = [userNapne];
     try {
-      return this.alunoRepository.save(aluno);
+      const save = await this.alunoRepository.save(aluno);
+      return save;
     } catch (e) {
       throw new Error(e);
     }

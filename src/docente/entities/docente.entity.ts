@@ -33,7 +33,7 @@ export class Docente {
   senha: string;
 
   @Column()
-  curso: string;
+  cursos: string;
 
   @Column({ name: 'user_type', default: 'docente' })
   userType?: string;

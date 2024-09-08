@@ -9,6 +9,7 @@ import {
   DeleteDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -71,12 +72,12 @@ export class Aluno {
   @OneToOne(() => QuestionarioDiscente, (questionario) => questionario.aluno)
   questionario?: QuestionarioDiscente;
 
-  @OneToOne(() => Napne, (napne) => napne.aluno)
+  @ManyToOne(() => Napne, (napne) => napne.aluno)
   @JoinColumn({ name: 'napne_id', referencedColumnName: 'id' })
   napne: Napne;
 
   @OneToMany(() => QuestionarioDocente, (questionario) => questionario.aluno)
-  questionarioDocente?: QuestionarioDocente;
+  questionarioDocente?: QuestionarioDocente[];
 
   constructor(aluno: Partial<Aluno>) {
     Object.assign(this, aluno);

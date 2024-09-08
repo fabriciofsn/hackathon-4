@@ -2,6 +2,8 @@ import { Aluno } from 'src/aluno/entities/aluno.entity';
 import { Docente } from 'src/docente/entities/docente.entity';
 import { Napne } from 'src/napne/entities/napne.entity';
 import {
+  AfterInsert,
+  AfterUpdate,
   Column,
   Entity,
   JoinColumn,
@@ -93,4 +95,7 @@ export class QuestionarioDiscente {
   constructor(ques: Partial<QuestionarioDiscente>) {
     Object.assign(this, ques);
   }
+
+  @AfterInsert()
+  async sendEmail() {}
 }
