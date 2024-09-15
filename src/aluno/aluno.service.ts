@@ -33,7 +33,15 @@ export class AlunoService {
 
   findAll(): Promise<Partial<Aluno>[]> {
     return this.alunoRepository.find({
-      select: ['nome', 'CPF', 'CPFresponsavel', 'curso', 'matricula', 'email'],
+      select: [
+        'id',
+        'nome',
+        'CPF',
+        'CPFresponsavel',
+        'curso',
+        'matricula',
+        'email',
+      ],
     });
   }
 

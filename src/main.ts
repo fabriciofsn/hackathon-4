@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 
-const whiteList = ['http://localhost:5173/'];
+const whiteList = ['*'];
 
 const options = {
   origin: process.env.NODE_ENV == 'prod' ? whiteList : true,

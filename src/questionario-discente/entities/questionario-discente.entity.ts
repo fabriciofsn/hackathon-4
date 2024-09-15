@@ -1,5 +1,7 @@
 import { Aluno } from 'src/aluno/entities/aluno.entity';
 import { Docente } from 'src/docente/entities/docente.entity';
+import { EmailController } from 'src/email/email.controller';
+import { EmailService } from 'src/email/email.service';
 import { Napne } from 'src/napne/entities/napne.entity';
 import {
   AfterInsert,
@@ -10,6 +12,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { QuestionarioDiscenteService } from '../questionario-discente.service';
 
 export enum Moradia {
   ALUGUEL = 'ALGUEL',
@@ -95,7 +98,4 @@ export class QuestionarioDiscente {
   constructor(ques: Partial<QuestionarioDiscente>) {
     Object.assign(this, ques);
   }
-
-  @AfterInsert()
-  async sendEmail() {}
 }

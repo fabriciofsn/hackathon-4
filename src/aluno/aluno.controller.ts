@@ -28,7 +28,7 @@ export class AlunoController {
   }
 
   @Get()
-  @Roles(Role.Napne)
+  @Roles(Role.Napne, Role.Docente)
   findAll() {
     return this.alunoService.findAll();
   }

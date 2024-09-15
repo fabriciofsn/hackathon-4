@@ -11,6 +11,7 @@ import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './auth/auth.guard';
 import { RolesGuard } from './auth/roles.guard';
 import { CursosModule } from './cursos/cursos.module';
+import { EmailModule } from './email/email.module';
 
 @Module({
   imports: [
@@ -23,6 +24,7 @@ import { CursosModule } from './cursos/cursos.module';
     QuestionarioDiscenteModule,
     AuthModule,
     CursosModule,
+    EmailModule,
   ],
   controllers: [],
   providers: [
