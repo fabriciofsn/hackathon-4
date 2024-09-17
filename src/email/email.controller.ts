@@ -14,8 +14,8 @@ export class EmailController {
   constructor(private readonly emailService: EmailService) {}
 
   @Post()
-  sendEmail(@Body() sendEmailDto: SendEmailDto): void {
-    const { to, from, subject, text, html } = sendEmailDto;
-    return this.emailService.sendEmail(to, from, subject, text, html);
+  sendEmail(sendEmailDto: SendEmailDto): void {
+    console.log(sendEmailDto);
+    return this.emailService.sendEmail(sendEmailDto);
   }
 }

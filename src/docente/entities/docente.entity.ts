@@ -16,6 +16,8 @@ import * as bcrypt from 'bcrypt';
 import { Matches } from 'class-validator';
 import { Napne } from 'src/napne/entities/napne.entity';
 import { QuestionarioDocente } from 'src/questionario-docente/entities/questionario-docente.entity';
+import { EmailController } from 'src/email/email.controller';
+import { EmailService } from 'src/email/email.service';
 
 @Entity()
 export class Docente {

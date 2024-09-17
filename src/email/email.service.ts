@@ -1,23 +1,19 @@
 import { MailerService } from '@nestjs-modules/mailer';
 import { Injectable } from '@nestjs/common';
 
+interface dto {
+  to: string;
+  from: string;
+  subject: string;
+  text: string;
+  html: string;
+}
+
 @Injectable()
 export class EmailService {
   constructor(private readonly mailService: MailerService) {}
 
-  sendEmail(
-    to: string,
-    from: string,
-    subject: string,
-    text: string,
-    html: string,
-  ): void {
-    this.mailService.sendMail({
-      to,
-      from,
-      subject,
-      text,
-      html,
-    });
+  sendEmail(dto: dto): void {
+    this.mailService.sendMail(dto);
   }
 }
