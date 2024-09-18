@@ -40,6 +40,7 @@ export class DocenteController {
   }
 
   @Patch(':id')
+  @Roles(Role.Docente)
   update(@Param('id') id: string, @Body() updateDocenteDto: UpdateDocenteDto) {
     return this.docenteService.update(+id, updateDocenteDto);
   }

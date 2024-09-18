@@ -16,8 +16,6 @@ import * as bcrypt from 'bcrypt';
 import { Matches } from 'class-validator';
 import { Napne } from 'src/napne/entities/napne.entity';
 import { QuestionarioDocente } from 'src/questionario-docente/entities/questionario-docente.entity';
-import { EmailController } from 'src/email/email.controller';
-import { EmailService } from 'src/email/email.service';
 
 @Entity()
 export class Docente {
@@ -39,6 +37,9 @@ export class Docente {
 
   @Column({ name: 'user_type', default: 'docente' })
   userType?: string;
+
+  @Column({ name: 'vezes_senha_atualizada', nullable: true, default: 0 })
+  vezesAtualizouSenha?: number = 0;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
@@ -64,6 +65,7 @@ export class Docente {
   @BeforeUpdate()
   async hashPassword(): Promise<void> {
     if (this.senha) {
+      this.vezesAtualizouSenha++;
       const salt = await bcrypt.genSalt();
       this.senha = await bcrypt.hash(this.senha, salt);
     }

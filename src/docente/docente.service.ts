@@ -18,22 +18,26 @@ export class DocenteService {
   ) {}
 
   async create(createDocenteDto: CreateDocenteDto) {
-    const { napne } = createDocenteDto;
-    const userNapne = await this.napneRepository.findOne({
-      where: { id: +napne },
-    });
-    const userDocente = new Docente({ napne: userNapne, ...createDocenteDto });
+    try {
+      const { napne } = createDocenteDto;
+      const userNapne = await this.napneRepository.findOne({
+        where: { id: +napne },
+      });
+      const userDocente = new Docente({
+        napne: userNapne,
+        ...createDocenteDto,
+      });
 
-    EnviarEmailDocente.enviarEmail(
-      {
-        to: userDocente.email,
-        from: userNapne.email,
-        subject: 'Dados para acesso ao sistema',
-        text: 'Email e senha',
-        html: `
+      EnviarEmailDocente.enviarEmail(
+        {
+          to: userDocente.email,
+          from: userNapne.email,
+          subject: 'Dados para acesso ao sistema',
+          text: 'Email e senha',
+          html: `
         <h1>Olá Professor(a) ${userDocente.nome}</h1> <br />
         <p>Abaixo você poderá visualizar seus dados de login ao sistema NAPNE</p>
-        <strong>É impressindível que o senhor(a) atualize a sua senha ao acessar o sistema pela primeira vez</strong>
+        <strong><i>É impressindível que o senhor(a) atualize a sua senha ao acessar o sistema pela primeira vez</i></strong>
         <br />
         Email: ${userDocente.email} <br />
         Senha: ${createDocenteDto.senha} <br />
@@ -41,11 +45,14 @@ export class DocenteService {
 
         <a target="_blank" href="http://localhost:5173/login">Clique aqui</a>
         `,
-      },
-      this.emailService,
-    );
+        },
+        this.emailService,
+      );
 
-    return this.docenteRepository.save(userDocente);
+      return this.docenteRepository.save(userDocente);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   findAll() {
@@ -58,8 +65,8 @@ export class DocenteService {
     return this.docenteRepository.findOne({ where: { id } });
   }
 
-  async findByEmail(email: string) {
-    const user = await this.docenteRepository.findOne({ where: { email } });
+  async findByEmail(id: number) {
+    const user = await this.docenteRepository.findOne({ where: { id } });
     return user;
   }
 
@@ -67,7 +74,7 @@ export class DocenteService {
     const docenteUpdate = await this.docenteRepository.findOne({
       where: { id },
     });
-    if (!docenteUpdate) throw new NotFoundException('Aluno não encontrado');
+    if (!docenteUpdate) throw new NotFoundException('Docente não encontrado');
 
     this.docenteRepository.merge(docenteUpdate, updateDocenteDto);
 
