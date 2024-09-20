@@ -16,6 +16,15 @@ import { Role } from 'src/auth/role.enum';
 import { RolesGuard } from 'src/auth/roles.guard';
 import { AuthGuard } from 'src/auth/auth.guard';
 
+export class EnviarFormularioDto {
+  idDiscente: number;
+  idNapne: number;
+  CPF: string;
+  emailNapne: string;
+  emailDiscente: string;
+  nomeDiscente: string;
+}
+
 @Controller('aluno')
 @UseGuards(AuthGuard, RolesGuard)
 export class AlunoController {
@@ -31,6 +40,11 @@ export class AlunoController {
   @Roles(Role.Napne, Role.Docente)
   findAll() {
     return this.alunoService.findAll();
+  }
+
+  @Post('/enviar-formulario')
+  enviarFormulario(@Body() data: EnviarFormularioDto) {
+    this.alunoService.enviarQuestionario(data);
   }
 
   @Get(':id')
