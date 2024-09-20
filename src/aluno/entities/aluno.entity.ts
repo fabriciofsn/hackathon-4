@@ -69,7 +69,7 @@ export class Aluno {
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date;
 
-  @OneToOne(() => QuestionarioDiscente, (questionario) => questionario.aluno)
+  @OneToOne(() => QuestionarioDiscente, (questionario) => questionario.alunoId)
   questionario?: QuestionarioDiscente;
 
   @ManyToOne(() => Napne, (napne) => napne.aluno)

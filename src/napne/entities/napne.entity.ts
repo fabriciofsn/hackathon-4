@@ -49,7 +49,7 @@ export class Napne {
   @DeleteDateColumn({ name: 'deleted_at' })
   deletedAt: Date;
 
-  @OneToOne(() => QuestionarioDiscente, (questionario) => questionario.napne)
+  @OneToOne(() => QuestionarioDiscente, (questionario) => questionario.napneId)
   questionario: QuestionarioDiscente;
 
   @OneToMany(() => Aluno, (aluno) => aluno.napne)

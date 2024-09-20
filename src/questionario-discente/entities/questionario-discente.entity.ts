@@ -30,6 +30,14 @@ export class QuestionarioDiscente {
   @PrimaryGeneratedColumn('increment')
   id: number;
 
+  @OneToOne(() => Aluno, (aluno: Aluno) => aluno.questionario)
+  @JoinColumn({ name: 'aluno_id', referencedColumnName: 'id' })
+  alunoId: Aluno;
+
+  @OneToOne(() => Napne, (napne) => napne.questionario)
+  @JoinColumn({ name: 'napne_id', referencedColumnName: 'id' })
+  napneId: Napne;
+
   @Column({ name: 'recebe_recebeu_atend_medico_especifico' })
   recebeRecebeuAtendMedicoEspecifico: Boolean;
 
@@ -81,19 +89,11 @@ export class QuestionarioDiscente {
   @Column({ name: 'qnt_pessoas_acima_60_anos', type: 'integer' })
   qntPessoasAcima60Anos: number;
 
-  @Column({ name: 'opcao_de_moradia', type: 'enum', enum: Moradia })
-  opcaoMoradia: Moradia;
+  @Column({ name: 'opcao_de_moradia' })
+  opcaoMoradia: string;
 
   @Column({ name: 'precisa_transporte_vir_ao_campus' })
   precisaTransporteVirAoCampus: Boolean;
-
-  @OneToOne(() => Aluno, (aluno: Aluno) => aluno.questionario)
-  @JoinColumn({ name: 'aluno_id', referencedColumnName: 'id' })
-  aluno: Aluno;
-
-  @OneToOne(() => Napne, (napne) => napne.questionario)
-  @JoinColumn({ name: 'napne_id', referencedColumnName: 'id' })
-  napne: Napne;
 
   constructor(ques: Partial<QuestionarioDiscente>) {
     Object.assign(this, ques);

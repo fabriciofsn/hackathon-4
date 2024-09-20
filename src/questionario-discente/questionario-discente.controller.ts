@@ -32,7 +32,7 @@ export class QuestionarioDiscenteController {
   }
 
   @Get()
-  @Roles(Role.Napne)
+  @Roles(Role.Napne, Role.Docente)
   findAll() {
     return this.questionarioDiscenteService.findAll();
   }
